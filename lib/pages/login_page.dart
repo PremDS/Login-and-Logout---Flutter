@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_system/services/api_service.dart';
+import 'package:login_system/services/progressHUD.dart';
 import 'package:login_system/utils/form_helper.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   String _username  = "";
   String _password = "";
   bool hidePassword = true;
+  bool showLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,12 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: Colors.grey[200],
         key: _scaffoldKey,
-        body: _loginUISetup(context),
+        body: ProgressHUD(
+          child: _loginUISetup(context),
+          inAsyncCall: showLoading,
+          opacity: 0.3,
+
+        ),
       ),
     );
   }
@@ -138,13 +146,17 @@ class _LoginPageState extends State<LoginPage> {
           height:20,
         ),
         Center(
-          child: FormHelper.saveButton(
-              "Login",
-              () {
+          child:showLoading
+              ? CircularProgressIndicator()
+              : FormHelper.saveButton("Login",() {
                 if(validateAndSave()) {
                   print("Username: $_username");
                   print("Password: $_password");
-
+                  showLoading=true;
+                  setState((){});
+                  APIServices.loginCustomer(_username, _password).then((response) {
+                    print(response);
+                  });
                 }
 
           }),
