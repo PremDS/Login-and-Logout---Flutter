@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_system/services/api_service.dart';
-import 'package:login_system/services/progressHUD.dart';
 import 'package:login_system/utils/form_helper.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,24 +23,17 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: Colors.grey[200],
         key: _scaffoldKey,
-        body: ProgressHUD(
-          child: _loginUISetup(context),
-          inAsyncCall: showLoading,
-          opacity: 0.3,
-
-        ),
+        body: _loginUISetup(context),
       ),
     );
   }
 
 
   Widget _loginUISetup(BuildContext context) {
-    return new SingleChildScrollView(
-      child: Container(
-        child: Form(
-          key:globalFormKey,
-          child:_loginUI(context),
-        )
+    return  SingleChildScrollView(
+      child: Form(
+        key:globalFormKey,
+        child:_loginUI(context),
       ),
     );
   }
@@ -54,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           width:MediaQuery.of(context).size.width,
           height:MediaQuery.of(context).size.height / 3.5,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin:Alignment.topCenter,
               end:Alignment.bottomCenter,
@@ -70,27 +62,27 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+             const Spacer(),
               Align(
                 alignment: Alignment.center,
                 child: Image.network(
                     "https://premtamang.com/static/images/Prem%20Tamang.png",
-                    fit:BoxFit.contain,
-                    width:140
+                    fit: BoxFit.contain,
+                    width: 140
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),
-        Center(
+        const Center(
           child: Padding(
             padding:EdgeInsets.only(bottom:20, top:40),
             child:Text("Login", style:TextStyle(fontWeight: FontWeight.bold,fontSize: 25))
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom:20, top:20),
+          padding:const EdgeInsets.only(bottom:20, top:20),
           child: FormHelper.inputFieldWidget(
             context,
             Icon(Icons.verified_user),
@@ -110,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         Padding(
-          padding:EdgeInsets.only(bottom: 20),
+          padding:const EdgeInsets.only(bottom: 20),
           child: FormHelper.inputFieldWidget(
               context,
               Icon(Icons.lock),
@@ -142,13 +134,11 @@ class _LoginPageState extends State<LoginPage> {
 
               ),
         ),
-        SizedBox(
+        const SizedBox(
           height:20,
         ),
         Center(
-          child:showLoading
-              ? CircularProgressIndicator()
-              : FormHelper.saveButton("Login",() {
+          child:FormHelper.saveButton("Login",() {
                 if(validateAndSave()) {
                   print("Username: $_username");
                   print("Password: $_password");

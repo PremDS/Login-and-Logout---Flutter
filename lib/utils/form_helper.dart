@@ -10,14 +10,14 @@ class FormHelper {
       Function onValidate,
       Function onSaved, {
         String initialValue = "",
-        obsecureText:false,
+        obsecureText=false,
         Widget? suffixIcon,
       }) {
     return Container(
-      padding: EdgeInsets.only(left:20, right:20),
+      padding: const EdgeInsets.only(left:20, right:20),
       child: TextFormField(
         initialValue: initialValue,
-        key: new Key(keyName),
+        key:  Key(keyName),
         obscureText: obsecureText,
         validator: (val) {
           return onValidate(val);
@@ -46,7 +46,7 @@ class FormHelper {
           ),
           suffixIcon: suffixIcon,
           prefixIcon: Padding(
-            padding:EdgeInsets.only(left:30, right:10),
+            padding:const EdgeInsets.only(left:30, right:10),
             child: IconTheme(
               data: IconThemeData(color:Theme.of(context).primaryColor) ,
               child:icon,
@@ -62,7 +62,7 @@ class FormHelper {
       String buttonText,
       Function onTap,
       ) {
-    return Container(
+    return  Container(
       height: 50,
       width:150,
       child: GestureDetector(
@@ -86,7 +86,7 @@ class FormHelper {
               Center(
                 child:Text(
                   buttonText,
-                  style:TextStyle(
+                  style:const TextStyle(
                     color:Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
