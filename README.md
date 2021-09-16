@@ -1,4 +1,4 @@
-# login_system
+# Login and Logout in Flutter with JWT via Django as backend 
 
 A new Flutter project.
 
